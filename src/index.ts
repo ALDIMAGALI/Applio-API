@@ -25,18 +25,14 @@ const PORT = 6969;
 
 app.get('/ping', async (_req, res) => {
   const start = Date.now();
-
   await new Promise((resolve) => setTimeout(resolve, 100));
-
   const latency = Date.now() - start;
-
   console.log(`¡Pinged on ${new Date().toLocaleDateString()} with latency ${latency} ms!`);
   res.status(200).json({ latency: latency + 'ms' });
 });
 
 app.use('/key=:apiKey/models', async (req, res, next) => {
   const apiKey = req.params.apiKey;
-
   const { data: tokens, error } = await supabase
     .from('tokens')
     .select('token')
@@ -54,7 +50,6 @@ app.use('/key=:apiKey/models', async (req, res, next) => {
 
 app.use('/key=:apiKey/blog', async (req, res, next) => {
   const apiKey = req.params.apiKey;
-
   const { data: tokens, error } = await supabase
     .from('tokens')
     .select('token')
@@ -72,7 +67,6 @@ app.use('/key=:apiKey/blog', async (req, res, next) => {
 
 app.use('/key=:apiKey/user', async (req, res, next) => {
   const apiKey = req.params.apiKey;
-
   const { data: user, error } = await supabase
     .from('tokens')
     .select('role')
